@@ -21,6 +21,8 @@ const generateConfig = (env) => {
     return {
         entry: {
             '01': './src/page/01/01.js',
+            '02': './src/page/02/02.js',
+            '03': './src/page/03/03.js',
         },
         output: {
             path: Path.resolve(__dirname, '../dist'),
@@ -69,6 +71,8 @@ const generateConfig = (env) => {
                 $: 'jquery'
             }),
             new HtmlWebpackPlugin(getHtmlConfig('01', '01', env)),
+            new HtmlWebpackPlugin(getHtmlConfig('02', '02', env)),
+            new HtmlWebpackPlugin(getHtmlConfig('03', '03', env)),
 
         ]
     }
@@ -81,7 +85,7 @@ module.exports = (env) => {
 function getHtmlConfig(name, title, env = 'production') {
     return {
         filename: `${name}.html`,
-        template: Path.resolve(__dirname, `../src/view/${name}/${name}.ejs`),
+        template: Path.resolve(__dirname, `../src/page/${name}/${name}.ejs`),
         minify: {
             collapseWhitespace: env === 'production' ? true : false
         },
