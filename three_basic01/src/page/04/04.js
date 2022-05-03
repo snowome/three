@@ -9,22 +9,28 @@ const doorImg = require('./images/door.jpg')
 const aplhaImg = require('./images/alpha.jpg')
 const ambientOcclusionImg = require('./images/ambientOcclusion.jpg')
 const heightImg = require('./images/height.jpg')
+const roughnessImg = require('./images/roughness.jpg')
+
 
 const textLoader = new THREE.TextureLoader()
 const doorTexture = textLoader.load(doorImg)
 const alphaTexture = textLoader.load(aplhaImg)
 const aoTexture = textLoader.load(ambientOcclusionImg)
 const displacementTexture = textLoader.load(heightImg)
+const roughnessTexture = textLoader.load(roughnessImg)
 
-const geometry = new THREE.BoxGeometry(160, 160, 160, 20, 20, 20)
+const geometry = new THREE.BoxGeometry(160, 160, 160, 200, 200, 200)
 geometry.setAttribute('uv2', geometry.getAttribute('uv'))       // aoMap需要第二组UV
 const material = new THREE.MeshStandardMaterial({
+    color: 0xffff00,
     map: doorTexture,
     // alphaMap: alphaTexture,
     // aoMap: aoTexture,
     // aoMapIntensity: 1,
-    displacementMap: displacementTexture, // 置换贴图需要设置几何体的细分数，否则不显示
-    displacementScale: 16,
+    // displacementMap: displacementTexture, // 置换贴图需要设置几何体的细分数，否则不显示
+    // displacementScale: 10,
+    roughnessMap: roughnessTexture,         // 粗超度贴图需要用透视相机，正交相机看不出效果
+    roughness: 0.8,
 })
 
 const mesh = new THREE.Mesh(geometry, material)
@@ -38,17 +44,20 @@ const s = 200
 const axesHelper = new THREE.AxesHelper(200)
 scene.add(axesHelper)
 
-const camera = new THREE.OrthographicCamera(-s * aspect, s * aspect, s, -s, 1, 1000)
-camera.position.set(200, 300, 200)
+const camera = new THREE.PerspectiveCamera(75, width / height, 1, 1000);
+camera.position.set(200, 0, 300)
 camera.lookAt(scene.position)
 scene.add(camera)
 
 
-const ambient = new THREE.AmbientLight(0xffffff, 0.8)
+const ambient = new THREE.AmbientLight(0xffffff, 0.6)
 scene.add(ambient)
-const directionaLight = new THREE.DirectionalLight(0xffffff, 1)
-directionaLight.position.set(600, 800, 600)
+const directionaLight = new THREE.DirectionalLight(0xffffff, 0.6)
+directionaLight.position.set(400, 200, 600)
 scene.add(directionaLight)
+const directionaLight2 = directionaLight.clone()
+directionaLight2.position.set(-400, -200, -600)
+scene.add(directionaLight2)
 
 const renderer = new THREE.WebGLRenderer()
 renderer.setSize(width, height)
