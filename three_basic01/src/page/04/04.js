@@ -10,6 +10,7 @@ const aplhaImg = require('./images/alpha.jpg')
 const ambientOcclusionImg = require('./images/ambientOcclusion.jpg')
 const heightImg = require('./images/height.jpg')
 const roughnessImg = require('./images/roughness.jpg')
+const metalnessImg = require('./images/metalness.jpg')
 
 
 const textLoader = new THREE.TextureLoader()
@@ -18,6 +19,7 @@ const alphaTexture = textLoader.load(aplhaImg)
 const aoTexture = textLoader.load(ambientOcclusionImg)
 const displacementTexture = textLoader.load(heightImg)
 const roughnessTexture = textLoader.load(roughnessImg)
+const metalnessTexture = textLoader.load(metalnessImg)
 
 const geometry = new THREE.BoxGeometry(160, 160, 160, 200, 200, 200)
 geometry.setAttribute('uv2', geometry.getAttribute('uv'))       // aoMap需要第二组UV
@@ -31,6 +33,8 @@ const material = new THREE.MeshStandardMaterial({
     // displacementScale: 10,
     roughnessMap: roughnessTexture,         // 粗超度贴图需要用透视相机，正交相机看不出效果
     roughness: 0.8,
+    metalnessMap: metalnessTexture,         // 金属度贴图
+    metalness: 0.6,
 })
 
 const mesh = new THREE.Mesh(geometry, material)
