@@ -11,6 +11,7 @@ const ambientOcclusionImg = require('./images/ambientOcclusion.jpg')
 const heightImg = require('./images/height.jpg')
 const roughnessImg = require('./images/roughness.jpg')
 const metalnessImg = require('./images/metalness.jpg')
+const normalImg = require('./images/normal.jpg')
 
 
 const textLoader = new THREE.TextureLoader()
@@ -20,21 +21,25 @@ const aoTexture = textLoader.load(ambientOcclusionImg)
 const displacementTexture = textLoader.load(heightImg)
 const roughnessTexture = textLoader.load(roughnessImg)
 const metalnessTexture = textLoader.load(metalnessImg)
+const normalTexture = textLoader.load(normalImg)
 
 const geometry = new THREE.BoxGeometry(160, 160, 160, 200, 200, 200)
 geometry.setAttribute('uv2', geometry.getAttribute('uv'))       // aoMap需要第二组UV
 const material = new THREE.MeshStandardMaterial({
     color: 0xffff00,
     map: doorTexture,
-    // alphaMap: alphaTexture,
-    // aoMap: aoTexture,
-    // aoMapIntensity: 1,
-    // displacementMap: displacementTexture, // 置换贴图需要设置几何体的细分数，否则不显示
-    // displacementScale: 10,
+    alphaMap: alphaTexture,
+    transparent: true,
+    side: THREE.DoubleSide,
+    aoMap: aoTexture,
+    aoMapIntensity: 1,
+    displacementMap: displacementTexture, // 置换贴图需要设置几何体的细分数，否则不显示
+    displacementScale: 10,
     roughnessMap: roughnessTexture,         // 粗超度贴图需要用透视相机，正交相机看不出效果
     roughness: 0.8,
     metalnessMap: metalnessTexture,         // 金属度贴图
     metalness: 0.6,
+    normalMap: normalTexture
 })
 
 const mesh = new THREE.Mesh(geometry, material)
