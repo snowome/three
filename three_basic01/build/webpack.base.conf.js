@@ -24,6 +24,7 @@ const generateConfig = (env) => {
             '02': './src/page/02/02.js',
             '03': './src/page/03/03.js',
             '04': './src/page/04/04.js',
+            '05': './src/page/05/05.js',
         },
         output: {
             path: Path.resolve(__dirname, '../dist'),
@@ -53,7 +54,7 @@ const generateConfig = (env) => {
                     use: htmlLoader(env)
                 },
                 {
-                    test: /\.(png|jpe?g|gif|svg)$/,
+                    test: /\.(png|jpe?g|gif|svg|hdr)$/,
                     use: imagesLoader(env)
                 },
                 {
@@ -75,6 +76,7 @@ const generateConfig = (env) => {
             new HtmlWebpackPlugin(getHtmlConfig('02', '02', env)),
             new HtmlWebpackPlugin(getHtmlConfig('03', '03', env)),
             new HtmlWebpackPlugin(getHtmlConfig('04', '04', env)),
+            new HtmlWebpackPlugin(getHtmlConfig('05', '05', env)),
 
         ]
     }
