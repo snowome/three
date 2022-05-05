@@ -13,8 +13,22 @@ const roughnessImg = require('./images/roughness.jpg')
 const metalnessImg = require('./images/metalness.jpg')
 const normalImg = require('./images/normal.jpg')
 
+const loadingManager = new THREE.LoadingManager(doorImg)
+loadingManager.onStart = function (url, itemsLoaded, itemsTotal) {
+    console.log('Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.')
+}
+loadingManager.onLoad = function ( ) {
+    console.log( 'Loading complete!')
+}
+loadingManager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
+    console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' )
+}
 
-const textLoader = new THREE.TextureLoader()
+loadingManager.onError = function ( url ) {
+    console.log( 'There was an error loading ' + url )
+}
+
+const textLoader = new THREE.TextureLoader(loadingManager)
 const doorTexture = textLoader.load(doorImg)
 const alphaTexture = textLoader.load(aplhaImg)
 const aoTexture = textLoader.load(ambientOcclusionImg)
