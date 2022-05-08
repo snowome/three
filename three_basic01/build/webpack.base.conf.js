@@ -26,6 +26,7 @@ const generateConfig = (env) => {
             '04': './src/page/04/04.js',
             '05': './src/page/05/05.js',
             '06': './src/page/06/06.js',
+            '07': './src/page/07/07.js',
         },
         output: {
             path: Path.resolve(__dirname, '../dist'),
@@ -79,6 +80,7 @@ const generateConfig = (env) => {
             new HtmlWebpackPlugin(getHtmlConfig('04', '04', env)),
             new HtmlWebpackPlugin(getHtmlConfig('05', '05', env)),
             new HtmlWebpackPlugin(getHtmlConfig('06', '06', env)),
+            new HtmlWebpackPlugin(getHtmlConfig('07', '07', env)),
         ]
     }
 }
