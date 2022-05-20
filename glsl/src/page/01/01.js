@@ -11,10 +11,22 @@ const aspect = width / height
 
 const scene = new THREE.Scene()
 const geometry = new THREE.PlaneBufferGeometry(1, 1, 64, 64)
+const params = {
+    uFrequency: 10,
+    uScale: 0.05,
+}
 const shaderMaterial = new THREE.ShaderMaterial({
     vertexShader: patternVertexShader,
     fragmentShader: patternFragmentShader,
     uniforms: {
+        // 波浪的频率
+        uFrequency: {
+            value: params.uFrequency,
+        },
+        // 波浪的幅度
+        uScale: {
+            value: params.uScale,
+        },
         uTime: {
             value: 0,
         },
