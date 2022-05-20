@@ -6,7 +6,7 @@ const generateConfig = env => {
     return {
         entry: {
             '01': './src/page/01/01.js',
-            // '02': './src/page/02/02.js',
+            '02': './src/page/02/02.js',
             // '03': './src/page/03/03.js',
             // '04': './src/page/04/04.js',
             // '05': './src/page/05/05.js',
@@ -63,7 +63,7 @@ const generateConfig = env => {
                 $: 'jquery'
             }),
             new HtmlWebpackPlugin(getHtmlConfig('01', '01', env)),
-            // new HtmlWebpackPlugin(getHtmlConfig('02', '02', env)),
+            new HtmlWebpackPlugin(getHtmlConfig('02', '02', env)),
             // new HtmlWebpackPlugin(getHtmlConfig('03', '03', env)),
             // new HtmlWebpackPlugin(getHtmlConfig('04', '04', env)),
             // new HtmlWebpackPlugin(getHtmlConfig('05', '05', env)),
