@@ -8,6 +8,11 @@ const GlobAll = require('glob-all');          // 加载多路径
 
 module.exports = {
     mode: 'production',
+    output: {
+        path: Path.resolve(__dirname, '../dist'),
+        filename: 'static/js/[name].js',
+        publicPath: env === 'development' ? '/' : './'
+    },
     optimization: {
         // minimize: true,
         minimizer: [

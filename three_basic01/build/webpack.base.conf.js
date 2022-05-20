@@ -17,7 +17,6 @@ const fontsLoader = require('./loader.fonts.js');
 const resolvePath = relativePath => Path.resolve(process.cwd(), relativePath);
 
 const generateConfig = (env) => {
-    console.log(env)
     return {
         entry: {
             '01': './src/page/01/01.js',
