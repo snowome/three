@@ -1,8 +1,8 @@
 import '@/css/common.scss'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import flutterVertexShader from '@/shader/flutter/vertex.glsl'
-import flutterFragmentShader from '@/shader/flutter/fragment.glsl'
+import patternVertexShader from '@/shader/pattern/vertex.glsl'
+import patternFragmentShader from '@/shader/pattern/fragment.glsl'
 const textureImg = require('@/texture/da.jpeg')
 
 const width = window.innerWidth
@@ -11,27 +11,21 @@ const aspect = width / height
 
 const scene = new THREE.Scene()
 const geometry = new THREE.PlaneBufferGeometry(1, 1, 64, 64)
-const params = {
-    uFrequency: 10,
-    uScale: 0.05,
-}
+
 const shaderMaterial = new THREE.ShaderMaterial({
-    vertexShader: flutterVertexShader,
-    fragmentShader: flutterFragmentShader,
+    vertexShader: patternVertexShader,
+    fragmentShader: patternFragmentShader,
     uniforms: {
+        u_time: {
+            value: 0
+        },
         // 波浪的频率
-        uFrequency: {
-            value: params.uFrequency,
+        u_frequency: {
+            value: 10,
         },
         // 波浪的幅度
-        uScale: {
-            value: params.uScale,
-        },
-        uTime: {
-            value: 0,
-        },
-        uTexture: {
-            value: new THREE.TextureLoader().load(textureImg),
+        u_scale: {
+            value: 0.1,
         },
     },
     side: THREE.DoubleSide,
@@ -44,17 +38,17 @@ scene.add(mesh)
 
 
 const directionalLight = new THREE.DirectionalLight(0xffffff, 1)
-directionalLight.position.set(3, 4, 2)
+directionalLight.position.set(2, 3, 2)
 scene.add(directionalLight)
 
-var directionalLightHelper=new THREE.DirectionalLightHelper(directionalLight, 1, 0xff0000)
+var directionalLightHelper=new THREE.DirectionalLightHelper(directionalLight, 1, 0xffffff)
 scene.add(directionalLightHelper)
 
-const ambient = new THREE.AmbientLight(0xffffff, 0.6)
+const ambient = new THREE.AmbientLight(0xffffff, 0.9)
 scene.add(ambient)
 
 const camera = new THREE.PerspectiveCamera(75, aspect, 0.1, 100)
-camera.position.set(0, 0, 1)
+camera.position.set(0, 0, 2)
 camera.lookAt(scene.position)
 scene.add(camera)
 
@@ -62,9 +56,11 @@ const axesHelper = new THREE.AxesHelper(2000)
 scene.add(axesHelper)
 
 
-const renderer = new THREE.WebGLRenderer()
+const renderer = new THREE.WebGLRenderer({
+    // antialias: true
+})
 renderer.setSize(width, height)
-renderer.setClearColor(0x000000, 1)
+renderer.setClearColor(0x777777, 1)
 document.body.appendChild(renderer.domElement)
 
 const controls = new OrbitControls(camera, renderer.domElement)
@@ -73,7 +69,7 @@ const controls = new OrbitControls(camera, renderer.domElement)
 const clock = new THREE.Clock()
 function render() {
     const elapsedTime = clock.getElapsedTime()
-    shaderMaterial.uniforms.uTime.value = elapsedTime
+    shaderMaterial.uniforms.u_time.value = elapsedTime
     // controls.update()
     renderer.render(scene, camera)
     requestAnimationFrame(render)
