@@ -51,7 +51,7 @@ const config = {
                 ]
             },
             {
-                test: /\.(png|jpe?g|gif|svg|hdr|mp3)$/,
+                test: /\.(png|jpe?g|gif|svg|hdr|mp3|glb)$/,
                 use: [
                     {
                         loader: 'url-loader',

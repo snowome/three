@@ -7,7 +7,7 @@ const generateConfig = env => {
         entry: {
             '01': './src/page/01/01.js',
             '02': './src/page/02/02.js',
-            // '03': './src/page/03/03.js',
+            '03': './src/page/03/03.js',
             // '04': './src/page/04/04.js',
             // '05': './src/page/05/05.js',
             // '06': './src/page/06/06.js',
@@ -68,7 +68,7 @@ const generateConfig = env => {
             }),
             new HtmlWebpackPlugin(getHtmlConfig('01', '旗子飘动', env)),
             new HtmlWebpackPlugin(getHtmlConfig('02', '图案', env)),
-            // new HtmlWebpackPlugin(getHtmlConfig('03', '03', env)),
+            new HtmlWebpackPlugin(getHtmlConfig('03', '孔明灯', env)),
             // new HtmlWebpackPlugin(getHtmlConfig('04', '04', env)),
             // new HtmlWebpackPlugin(getHtmlConfig('05', '05', env)),
             // new HtmlWebpackPlugin(getHtmlConfig('06', '06', env)),
