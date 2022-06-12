@@ -162,7 +162,7 @@ const ambient = new THREE.AmbientLight(0xffffff, 0.9)
 scene.add(ambient)
 
 const camera = new THREE.PerspectiveCamera(75, aspect, 0.1, 1000)
-camera.position.set(0, 4, 4)
+camera.position.set(0, 6, 4)
 camera.lookAt(scene.position)
 scene.add(camera)
 

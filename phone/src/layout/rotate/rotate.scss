@@ -1,0 +1,14 @@
+#rotate-wrapper {
+    position: absolute;
+    /* top: 30px;*/
+    bottom: 120px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    padding: 12px;
+    user-select: none;
+}
+
+#rotate-wrapper img {
+    cursor: pointer;
+    width: 26px;
+}

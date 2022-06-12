@@ -1,0 +1,18 @@
+#color-wrapper {
+    width: 314px;
+    position: absolute;
+    /* top: 30px; */
+    top: 12px;
+    /* background:rgba(255,255,255,0.1); */
+    user-select: none;
+}
+.color-choose {
+    display: inline-block;
+    margin-left: 20px;
+    cursor: pointer;
+}
+.color-choose img {
+    width: 50px;
+}
+
+

@@ -78,7 +78,11 @@ const config = {
         ],
     },
     plugins: [
-        new FriendlyErrorsWebpackPlugin()
+        new FriendlyErrorsWebpackPlugin(),
+        new Webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify('development')
+        })
     ]
 }
+
 module.exports = merge(webpackBaseConf('development'), config)
